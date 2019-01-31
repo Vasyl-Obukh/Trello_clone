@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# own directories and files
+dist/
+yarn.lock
