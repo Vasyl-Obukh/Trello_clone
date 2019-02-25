@@ -1,0 +1,220 @@
+@import colors
+
+
+// Variables
+
+$board-width: 325px
+$board-height: 125px
+$board-scale: 1.1
+$board-gap: 40px
+$board-width-refactor: ($board-gap / 2) - (($board-scale - 1) / 2 * $board-width)
+$board-height-refactor: ($board-gap / 2) - (($board-scale - 1) / 2 * $board-height)
+
+
+// Mixins
+
+@mixin size-refactor($width: $board-width, $height: $board-height, $scale: $board-scale, $gap: $board-gap)
+  width: $width * $scale
+  height: $height * $scale
+  margin: (($gap / 2) - (($scale - 1) / 2 * $height)) (($gap / 2) - (($scale - 1) / 2 * $width))
+
+@mixin font-refactor($size, $scale: $board-scale)
+  @if $size
+    font-size: $size * $scale
+
+@mixin transition($time: 200ms)
+  transition: $time ease-in-out
+
+
+// Board styles
+
+.board
+  @include transition
+  display: flex
+  box-sizing: border-box
+  margin: $board-gap / 2
+  padding: 15px 0
+
+  height: $board-height
+  width: $board-width
+
+  justify-content: center
+  align-items: center
+
+  border-radius: 5px
+  background-color: $board-bgc
+  color: #333
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16)
+  cursor: pointer
+
+  &:hover
+    @include size-refactor
+    @include transition
+    box-shadow: 0 7px 16px rgba(0,0,0,0.23)
+
+    & .board-name
+      @include transition
+      font-size: 24px * $board-scale
+
+  &-name
+    @include transition
+    font-weight: 900
+
+
+// BoardCreateClosed styles
+
+.boardCreateClosed
+  background-color: $theme
+
+  &:hover > h3
+    @include font-refactor(19px)
+
+  &-title
+    @include transition
+    font-weight: 900
+    color: white
+    text-shadow: 0px 0px 3px #000
+
+
+// BoardCreateClosed styles
+
+.boardCreateOpen
+  flex-direction: column
+  padding: 30px 0
+  height: $board-height + 215px
+
+  background-color: $theme
+
+  &:hover
+    @include size-refactor($board-width, $board-height + 215px)
+    @include transition
+    box-shadow: 0 7px 16px rgba(0,0,0,0.23)
+
+    & .title
+      @include font-refactor(19px)
+      @include transition
+
+    & .close
+      @include font-refactor(20px)
+      @include transition
+
+    & .boardCreateOpen-body
+
+      & .question
+        @include font-refactor(12px)
+        @include transition
+
+      & .boardCreateForm
+
+        & .name
+          @include font-refactor(16px)
+          @include transition
+          width: 220px
+
+        & .error
+          @include transition
+          @include font-refactor(12px)
+          text-align: center
+        
+        & .buttons
+          @include transition
+          margin-top: 27px
+
+        & .cancel
+          @include font-refactor(14px)
+          @include transition
+          height: 49.5px
+          margin: 10.5px -9.5px 0.5px -4.5px
+
+        & .create
+          @include font-refactor(14px)
+          @include transition
+          height: 49.5px
+          width: 126.5px
+          margin: 10.5px 18px 0.5px
+
+
+  &-head
+    display: flex
+    justify-content: space-around
+    align-items: center
+    width: 100%
+    border-bottom: 1px solid white
+
+    & .title
+      @include transition
+      display: inline-block
+      color: white
+      text-shadow: 0px 0px 3px #000
+
+    & .close
+      @include transition
+      display: block
+      font-size: 20px
+      color: white
+
+  &-body
+
+    & .question
+      @include transition
+      font-size: 12px
+      color: white
+      text-shadow: 0px 0px 3px #000
+
+.boardCreateForm
+
+  & .name
+    @include transition
+    padding: 11px 15px
+    width: 200px
+
+    border: 2.5px solid rgba(255, 255, 255, 0.8)
+    border-radius: 5px
+    outline: none
+
+    font-size: 16px
+    box-shadow: 0 3px 3px rgba(0,0,0,0.16)
+
+  & .error
+    @include transition
+    margin: 10px 0 0 0
+    text-align: center
+
+    font:
+      size: 12px
+      weight: 400
+    color: #000
+    text-shadow: 1px 1px 1px white
+
+  & .buttons
+    @include transition
+    display: flex
+    margin: 20px 0 5px 0
+    justify-content: flex-end
+    width: 100%
+
+  & .cancel
+    @include transition
+    margin: 15px -5px 5px 0
+    height: 45px
+    border: none
+    outline: none
+
+    background: none
+    text-transform: uppercase
+    font-weight: 900
+    color: white
+    text-shadow: 0px 0px 3px #000
+    cursor: pointer
+
+  & .create
+    @include transition
+    margin: 15px 18px 5px 18px
+    height: 45px
+    width: 115px
+    border: none
+    outline: none
+
+    text-transform: uppercase
+    box-shadow: 0 3px 3px rgba(0,0,0,0.16)
+    cursor: pointer

@@ -1,0 +1,30 @@
+$btn-size: 50px
+$btn-scale: 1.25
+$mt-refactor: (1 - $btn-scale) / 2 * $btn-size
+
+@mixin transition($time: 200ms)
+  transition: $time ease-in-out
+
+
+.container:first-child
+  justify-content: center
+  align-items: center
+  height: 100px
+
+.home-btn
+  @iclude transition
+  width: $btn-size
+  height: $btn-size
+
+  font-size: 50px
+  opacity: 1
+  cursor: pointer
+
+  &:hover
+    @include transition
+    margin-top: $mt-refactor
+    width: $btn-size * $btn-scale
+    height: $btn-size * $btn-scale
+
+    opacity: 0.85
+    transform: rotate(-2.5deg)
